@@ -17,7 +17,7 @@ function Login() {
   async function login() {
     console.warn(username, password)
     let item={username, password};
-    let result= await fetch("http://13.229.95.227:8080/api/login/",{
+    let result= await fetch("http://prathai-avc.eba-34rcm7su.ap-southeast-1.elasticbeanstalk.com/api/login/",{
       method: 'POST',
       headers:{
         "Content-Type":"application/json",

@@ -19,6 +19,31 @@ function Logout() {
           Logout
         </button>
       ) : null}
+
+      {/* <a
+        className="nav-link dropdown-toggle btn rounded-pill"
+        style={{
+          color: "#d09b2c",
+          width: "80px",
+          backgroundColor: "#f0ebe1",
+        }}
+        href="#"
+        id="navbarDropdown"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        title={user && user.name}
+      ></a>
+      <div
+        className="dropdown-menu"
+        style={{ minWidth: "5rem" }}
+        aria-labelledby="navbarDropdown"
+      >
+        <a className="dropdown-item" onClick={logOut}>
+          Logout
+        </a>
+      </div> */}
     </div>
   );
 }

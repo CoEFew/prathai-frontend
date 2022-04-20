@@ -23,7 +23,7 @@ function Register() {
         let item={username,email,first_name,last_name,password}
         console.warn(item)
 
-        let result= await  fetch("http://13.229.95.227:8080/api/register/" ,{
+        let result= await  fetch("http://prathai-avc.eba-34rcm7su.ap-southeast-1.elasticbeanstalk.com/api/register/" ,{
             method: 'POST',
             body: JSON.stringify(item),
             headers:{
