@@ -1,24 +1,41 @@
-import React from "react";
+import React, { Component, useEffect, useReducer, useState } from "react";
 import "../App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBars, faVideo } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-
-
-
+import { NavLink, Link } from "react-router-dom";
+import Logout from "../pages/Logout";
+import Register from "../pages/Register";
 
 const Navbar = () => {
-
-  let user = JSON.parse(localStorage.getItem("user-info"));
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const history = useHistory();
-  function logOut() {
-    localStorage.clear();
-    history.push("/login");
+  useEffect(() => {
+    if (localStorage.getItem("user-info")) {
+      history.push("/");
+    }
+  }, []);
+  async function login() {
+    console.warn(username, password);
+    let item = { username, password };
+    let result = await fetch("http://13.229.95.227:8080/api/login/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+    result = await result.json();
+    localStorage.setItem("user-info", JSON.stringify(result));
+    history.push("/");
   }
+
+ 
   return (
     <div>
-      
       <div
         className="navbar-head py-3 ipad-ver mobile-ver mobile-xs-ver"
         style={{ position: "fixed", backgroundColor: "rgba(0, 0, 0, 0.3)" }}
@@ -38,7 +55,15 @@ const Navbar = () => {
             </a>
           </div>
           <div className="col nav-textend ipad-ver mobile-ver mobile-xs-ver">
-            <button
+
+            {
+              localStorage.getItem('user-info') ?
+              <>
+              
+              </>
+              :
+              <>
+              <button
               type="button"
               className="btn rounded-pill text-light"
               style={{ backgroundColor: "#d09b2c", width: "150px" }}
@@ -88,13 +113,12 @@ const Navbar = () => {
                 CN
               </a>
             </div>
-              
-            {localStorage.getItem("user-info") ? (
-        <button className="btn " title={user && user.name} onClick={logOut}>
-          Logout
-        </button>
-      ) : null}
+              </>
+            }
 
+            
+
+            <Logout />
           </div>
         </div>
       </div>
@@ -544,7 +568,7 @@ const Navbar = () => {
       <div
         className="modal fade"
         id="login"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -564,19 +588,21 @@ const Navbar = () => {
             </div>
             <div className="modal-body" style={{ padding: "0 1rem 1rem 1rem" }}>
               <h5 className="text-center font-weight-bold mb-4">เข้าสู่ระบบ</h5>
-              <h5 className="font-size15">เบอร์โทรศัพท์</h5>
+              <h5 className="font-size15">ชื่อผู้ใช้งาน</h5>
               <input
-                type="number"
                 className="form-control mb-3"
                 style={{ borderRadius: "15px" }}
-                placeholder="เบอร์โทรศัพท์"
+                type="text"
+                placeholder="username"
+                onChange={(e) => setUsername(e.target.value)}
               />
               <h5 className="font-size15">รหัสผ่าน</h5>
               <input
-                type="text"
                 className="form-control mb-3"
                 style={{ borderRadius: "15px" }}
-                placeholder="รหัสผ่าน"
+                type="password"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
               <h5
                 className="d-flex justify-content-end font-size15"
@@ -584,13 +610,16 @@ const Navbar = () => {
               >
                 ลืมรหัสผ่าน
               </h5>
-              <a
-                className="btn text-center w-100 text-light mt-1"
-                style={{ backgroundColor: "#d09b2c", borderRadius: "15px" }}
-                href="{{ url('/login') }}"
-              >
-                เข้าสู่ระบบ
-              </a>
+            
+                <a
+                  className="btn text-center w-100 text-light mt-1"
+                  style={{ backgroundColor: "#d09b2c", borderRadius: "15px" }}
+                  onClick={login}
+                  type="submit"
+                >
+                  เข้าสู่ระบบ
+                </a>
+              
               <div className="row mt-2">
                 <div className="col">
                   <hr />
@@ -612,89 +641,26 @@ const Navbar = () => {
               >
                 เข้าสู่ระบบด้วย Google <i className="fab fa-google-plus-g"></i>
               </button>
-              <button
+              {/* <button
                 className="btn text-center w-100 text-light mt-3"
                 style={{ backgroundColor: "#000000", borderRadius: "15px" }}
               >
                 เข้าสู่ระบบด้วย Apple ID <i className="fab fa-apple"></i>
-              </button>
-              <button
+              </button> */}
+              {/* <button
                 className="btn text-center w-100 text-light mt-3 mb-2"
                 style={{ backgroundColor: "#7f8685", borderRadius: "15px" }}
               >
                 ลงทะเบียน
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
       </div>
 
       {/* Register */}
-      <div
-        className="modal fade"
-        id="register"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content" style={{ borderRadius: "10px" }}>
-            <div className="modal-header border-bottom-0">
-              <button
-                type="button"
-                className="close"
-                style={{ fontSize: "3rem", padding: "0 1rem 0 1rem" }}
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body" style={{ padding: "0 1rem 1rem 1rem" }}>
-              <h5 className="text-center font-weight-bold mb-4">สมัครสมาชิก</h5>
-              <h5 className="font-size15">ชื่อ - นามสกุล</h5>
-              <input
-                type="text"
-                className="form-control mb-3"
-                style={{ borderRadius: "15px" }}
-                placeholder="ชื่อ - นามสกุล"
-              />
-              <h5 className="font-size15">
-                เบอร์โทรศัพท์ (เพื่อใช้ในการเข้าสู่ระบบ)
-              </h5>
-              <input
-                type="number"
-                className="form-control mb-3"
-                style={{ borderRadius: "15px" }}
-                placeholder="เบอร์โทรศัพท์"
-              />
-              <h5 className="font-size15">
-                รหัสผ่าน (เพื่อใช้ในการเข้าสู่ระบบ)
-              </h5>
-              <input
-                type="text"
-                className="form-control mb-3"
-                style={{ borderRadius: "15px" }}
-                placeholder="รหัสผ่าน"
-              />
-              <h5 className="font-size15">ยืนยันรหัสผ่าน</h5>
-              <input
-                type="text"
-                className="form-control mb-3"
-                style={{ borderRadius: "15px" }}
-                placeholder="ยืนยันรหัสผ่าน"
-              />
-              <button
-                className="btn text-center w-100 text-light mt-3 mb-2"
-                style={{ backgroundColor: "#d09b2c", borderRadius: "15px" }}
-              >
-                สมัครสมาชิก
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Register />
+      
     </div>
   );
 };

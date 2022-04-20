@@ -755,7 +755,7 @@ class Amuletlist extends Component {
                 </div>
 
                 <h5
-                  classNameName="mb-4 font-size18"
+                  className="mb-4 font-size18"
                   style={{ color: "#d09b2c" }}
                 >
                   #พระบูชา

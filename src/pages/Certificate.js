@@ -10,16 +10,16 @@ import $ from "jquery";
 import axios from "axios";
 
 class Certificate extends Component {
-  state = {
-    data: []
-  };
+  // state = {
+  //   data: []
+  // };
 
-  async componentDidMount() {
-    const result = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    this.setState({ data: result.data });
-  }
+  // async componentDidMount() {
+  //   const result = await axios.get(
+  //     "https://jsonplaceholder.typicode.com/users"
+  //   );
+  //   this.setState({ data: result.data });
+  // }
 
 
   render() {
@@ -206,7 +206,7 @@ class Certificate extends Component {
                             id="pre_img"
                             name="pre_img"
                             className="img-fluid w-100"
-                            src="{{asset('/img/หน้า certificate/img.png')}}"
+                            src="/img/หน้า certificate/img.png"
                             style={{ width: "100%", height: "100%" }}
                           />
                         </div>
@@ -215,7 +215,7 @@ class Certificate extends Component {
                             id="pre_img"
                             name="pre_img"
                             className="img-fluid w-100"
-                            src="{{asset('/img/หน้า certificate/img.png')}}"
+                            src="/img/หน้า certificate/img.png"
                           />
                         </div>
                         <div className="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-2">
@@ -223,7 +223,7 @@ class Certificate extends Component {
                             id="pre_img"
                             name="pre_img"
                             className="img-fluid w-100"
-                            src="{{asset('/img/หน้า certificate/img.png')}}"
+                            src="/img/หน้า certificate/img.png"
                           />
                         </div>
                         <div className="col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-2">
@@ -231,7 +231,7 @@ class Certificate extends Component {
                             id="pre_img"
                             name="pre_img"
                             className="img-fluid w-100"
-                            src="{{asset('/img/หน้า certificate/img.png')}}"
+                            src="/img/หน้า certificate/img.png"
                           />
                         </div>
                         <div
@@ -282,9 +282,9 @@ class Certificate extends Component {
                   </div>
                 </div>
               </div>
-              {this.state.data.map(user => (
+              {/* {this.state.data.map(user => (
               <div>{user.name}</div>
-            ))}
+            ))} */}
             </div>
 
             <div className="col-3 mobile-xs-ver mobile-ver ipad-ver dacktop-md-ver p-4">
@@ -544,7 +544,7 @@ class Certificate extends Component {
                 </div>
 
                 <h5
-                  classNameName="mb-4 font-size18"
+                  className="mb-4 font-size18"
                   style={{ color: "#d09b2c" }}
                 >
                   #พระบูชา

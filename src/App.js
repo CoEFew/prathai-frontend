@@ -8,6 +8,8 @@ import Contact from "./pages/Contact";
 import Policy from "./pages/Policy";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
+import Register from "./pages/Register";
+import Protected from "./pages/Protected";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,6 +26,7 @@ function App() {
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
+        <Route exact path="/register" component={Register} />
       </Switch>
     </div>
   );

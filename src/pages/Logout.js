@@ -7,12 +7,15 @@ function Logout() {
   const history = useHistory();
   function logOut() {
     localStorage.clear();
-    history.push("/login");
+    history.push("/");
   }
   return (
     <div>
-      <h1>Logout</h1>
-
+      <Nav>
+        <NavDropdown title={user && user.name}>
+          <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
       {localStorage.getItem("user-info") ? (
         <button className="btn " title={user && user.name} onClick={logOut}>
           Logout

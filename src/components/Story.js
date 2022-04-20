@@ -6,7 +6,7 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 export class Story extends Component {
   render() {
     return (
-      <OwlCarousel items={5} autoplay={true}>
+      <OwlCarousel items={5} autoplay={true} style={{zIndex:0}}>
         <div className="col-story-img">
           <img src="/img/svg/add2.svg" className="story-img-profile-add" />
           <img
