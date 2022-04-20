@@ -1,5 +1,4 @@
 import React, { Component, useEffect, useReducer, useState } from "react";
-import { NavLink, Nav, NavDropdown } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 function Logout() {
@@ -11,13 +10,12 @@ function Logout() {
   }
   return (
     <div>
-      <Nav>
-        <NavDropdown title={user && user.name}>
-          <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
-        </NavDropdown>
-      </Nav>
       {localStorage.getItem("user-info") ? (
-        <button className="btn " title={user && user.name} onClick={logOut}>
+        <button
+          className="btn text-light"
+          title={user && user.name}
+          onClick={logOut}
+        >
           Logout
         </button>
       ) : null}
